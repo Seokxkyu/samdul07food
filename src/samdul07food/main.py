@@ -8,8 +8,6 @@ import pandas as pd
 app = FastAPI()
 
 origins = [
-    "http://127.0.0.1:8899",
-    "http://localhost",
     "http://localhost:8899",
 ]
 
@@ -20,16 +18,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 
 def get_path():
     file_path = __file__
