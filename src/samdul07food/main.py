@@ -3,8 +3,22 @@ from typing import Union
 from fastapi import FastAPI
 from datetime import datetime
 import time
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:8899",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 def get_path():
     file_path = __file__
@@ -24,4 +38,3 @@ def food(name: str):
     print(t)
     return {"food": name, "time": t}
 
-food('치킨')
