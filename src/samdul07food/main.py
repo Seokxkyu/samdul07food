@@ -1,9 +1,9 @@
 import os
 from typing import Union
 from fastapi import FastAPI
-from datetime import datetime
 import time
 from fastapi.middleware.cors import CORSMiddleware
+import pandas as pd
 
 app = FastAPI()
 
@@ -35,6 +35,15 @@ def food(name: str):
 
     # 시간을 구함
     t = time.strftime("%Y-%m-%d %H:%M:%S")
-    print(t)
+    
+    df = pd.DataFrame([[t, name]], columns=['time', 'name'])
+
+    dir_path = get_path()
+    file_path = os.path.join(dir_path, 'food07.csv')
+
+    os.makedirs(file_path, exist_ok=True)
+
+    df.to_csv(file_path, mode='a', header=False, index=False)
+    
     return {"food": name, "time": t}
 
