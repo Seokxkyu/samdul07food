@@ -23,7 +23,7 @@ def food(name: str):
     # 시간을 구함
     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    df = pd.DataFrame([[name, time]], columns=['food', 'time'])
+    df = pd.DataFrame([[time, name]], columns=['time', 'name'])
     '''
     dir_path = get_path()    
     file_path = os.path.join(dir_path, 'food07.csv')
