@@ -37,8 +37,9 @@ def food(name: str):
     
     df = pd.DataFrame([[t, name]], columns=['time', 'name'])
     
-    dir_path = get_path()
-
+    path = get_path()
+    
+    dir_path = os.path.join(path, 'data')
     os.makedirs(dir_path, exist_ok=True)
 
     file_path = os.path.join(dir_path, 'food07.csv')
