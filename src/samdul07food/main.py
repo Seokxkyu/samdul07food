@@ -8,7 +8,7 @@ import pandas as pd
 app = FastAPI()
 
 origins = [
-    "http://localhost:8899",
+    "http://127.0.0.1:8899"
 ]
 
 app.add_middleware(
