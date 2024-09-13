@@ -2,6 +2,7 @@ import os
 from typing import Union
 from fastapi import FastAPI
 from datetime import datetime
+import time
 
 app = FastAPI()
 
@@ -19,6 +20,8 @@ def read_root():
 def food(name: str):
 
     # 시간을 구함
-    time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    t = time.strftime("%Y-%m-%d %H:%M:%S")
+    print(t)
+    return {"food": name, "time": t}
 
-    return {"food": name, "time": time}
+food('치킨')
