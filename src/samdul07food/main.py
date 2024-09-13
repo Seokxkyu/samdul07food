@@ -36,11 +36,12 @@ def food(name: str):
     t = time.strftime("%Y-%m-%d %H:%M:%S")
     
     df = pd.DataFrame([[t, name]], columns=['time', 'name'])
-
+    
     dir_path = get_path()
-    file_path = os.path.join(dir_path, 'food07.csv')
 
-    os.makedirs(file_path, exist_ok=True)
+    os.makedirs(dir_path, exist_ok=True)
+
+    file_path = os.path.join(dir_path, 'food07.csv')
 
     df.to_csv(file_path, mode='a', header=False, index=False)
     
