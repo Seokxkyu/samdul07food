@@ -1,7 +1,6 @@
 import os
 from typing import Union
 from fastapi import FastAPI
-import pandas as pd
 from datetime import datetime
 
 app = FastAPI()
