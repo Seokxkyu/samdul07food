@@ -51,7 +51,26 @@ def food(name: str):
 
     with open(file_path, 'a', newline='') as f:
         csv.DictWriter(f, fieldnames=['food', 'time']).writerow(data)
+    
+    import pymysql.cursors
 
+    connection = pymysql.connect(
+            host=os.getenv("DB_IP", "localhost"),
+            user='food',
+            password='1234',
+            database='fooddb',
+            port = int(os.getenv("DB_PORT", "33306")), 
+            cursorclass=pymysql.cursors.DictCursor
+    )
+    
+    sql = "INSERT INTO foodhistory(`username`, `foodname`, `dt`) VALUES(%s,%s,%s)"
+    
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute(sql, ('n07', name, formatted_time))
+        connection.commit()
+
+    '''
     db = pymysql.connect(
             host = '172.17.0.1',
             port = 13306,
@@ -62,10 +81,12 @@ def food(name: str):
     )
 
     cursor = db.cursor(pymysql.cursors.DictCursor)
+    
 
     sql = "INSERT INTO foodhistory(username, foodname, dt) VALUES(%s, %s, %s)"
     cursor.execute(sql, ('n07', name, t))
     db.commit()
     # df.to_csv(file_path, mode='a', header=False, index=False)
+    '''
 
     return data
