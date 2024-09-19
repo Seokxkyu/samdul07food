@@ -12,6 +12,7 @@ app = FastAPI()
 origins = [
     "https://samdul07food.web.app",
     "http://localhost:8899",
+    "http://127.0.0.1:8899"
 ]
 
 app.add_middleware(
@@ -21,6 +22,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+file_path = "/code/data/food07.csv"
+
+if not os.path.exists(file_path):
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
 def get_path():
     file_path = __file__
@@ -37,21 +43,20 @@ def food(name: str):
 
     # 시간을 구함
     t = time.strftime("%Y-%m-%d %H:%M:%S")
-    
-    # df = pd.DataFrame([[t, name]], columns=['time', 'name'])
-    
-    path = get_path()
-    
-    dir_path = os.path.join(path, 'data')
-    os.makedirs(dir_path, exist_ok=True)
 
-    file_path = os.path.join(dir_path, 'food07.csv')
-    
-    data = {"food":name, "time":t}
+    # df = pd.DataFrame([[t, name]], columns=['time', 'name'])
+    # path = get_path()
+
+    # dir_path = os.path.join(path, 'data')
+    # os.makedirs(dir_path, exist_ok=True)
+
+    # file_path = os.path.join(dir_path, 'food07.csv')
+
+    data = {"food": name, "time": t}
 
     with open(file_path, 'a', newline='') as f:
-        csv.DictWriter(f, fieldsname=['food', 'time'].writerow(data)
-    
+        csv.DictWriter(f, fieldnames=['food', 'time']).writerow(data)
+
     db = pymysql.connect(
             host = '172.17.0.1',
             port = 13306,
@@ -60,13 +65,12 @@ def food(name: str):
             db = 'fooddb',
             charset = 'utf8'
     )
-    
+
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
     sql = "INSERT INTO foodhistory(username, foodname, dt) VALUES(%s, %s, %s)"
     cursor.execute(sql, ('n07', name, t))
     db.commit()
     # df.to_csv(file_path, mode='a', header=False, index=False)
-    
-    return data
 
+    return data
