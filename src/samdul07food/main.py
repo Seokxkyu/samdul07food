@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import pymysql
 import csv
+import pytz
 
 app = FastAPI()
 
@@ -23,11 +24,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-file_path = "/code/data/food07.csv"
-
-if not os.path.exists(file_path):
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-
 def get_path():
     file_path = __file__
     dirpath = os.path.dirname(file_path)
@@ -40,17 +36,16 @@ def read_root():
 
 @app.get("/food")
 def food(name: str):
-
-    # 시간을 구함
-    t = time.strftime("%Y-%m-%d %H:%M:%S")
+    k_time = datetime.now(pytz.timezone('Asia/Seoul'))
+    t = k_time.strftime('%Y-%m-%d %H:%M:%S')
 
     # df = pd.DataFrame([[t, name]], columns=['time', 'name'])
-    # path = get_path()
+    path = get_path()
 
-    # dir_path = os.path.join(path, 'data')
-    # os.makedirs(dir_path, exist_ok=True)
+    dir_path = os.path.join(path, 'data')
+    os.makedirs(dir_path, exist_ok=True)
 
-    # file_path = os.path.join(dir_path, 'food07.csv')
+    file_path = os.path.join(dir_path, 'food07.csv')
 
     data = {"food": name, "time": t}
 
