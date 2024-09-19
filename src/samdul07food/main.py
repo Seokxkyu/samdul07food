@@ -4,12 +4,13 @@ from fastapi import FastAPI
 import time
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
-import pmysql
+import pymysql
 import csv
 
 app = FastAPI()
 
 origins = [
+    "https://samdul07food.web.app",
     "http://localhost:8899",
 ]
 
