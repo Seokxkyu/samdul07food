@@ -1,55 +1,61 @@
+<!DOCTYPE HTML>
+<!--
+	Highlights by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-	<head>
-		<title>samdulFood</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+        <head>
+                <title>samdulFood</title>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+                <link rel="stylesheet" href="assets/css/main.css" />
+        </head>
+        <body class="is-preload">
 
-		<!-- Header -->
-			<section id="header">
-				<header class="major">
-					<h1>SAMDULFOOD</h1>
-					<p id="foodDisplay">😋</p>
-				</header>
-			</section>
+                <!-- Header -->
+                        <section id="header">
+                                <header class="major">
+                                        <h1>SAMDULFOOD</h1>
+                                        <p id="foodDisplay">😋</p>
+                                </header>
+                        </section>
 
-		<!-- Footer -->
-			<section id="footer">
-				<div class="container">
-					<header class="major">
-						<h2>What did you eat?</h2>
-					</header>
-					<!-- <form method="post" action="#"> -->
-					<form id="foodForm" action="#">
-						<div class="row gtr-uniform">
-							<div class="col-12"><input type="text" name="foodName" id="foodName" placeholder="Food Name" /></div>
-							<div class="col-12">
-								<ul class="actions special">
-									<li><input type="submit" value="Send Message" class="primary" /></li>
-								</ul>
-							</div>
-						</div>
-					</form>
-				</div>
-				<footer>
-					<ul class="copyright">
-						<li>&copy; 32 food 😋</li>
-					</ul>
-				</footer>
-			</section>
+                <!-- Footer -->
+                        <section id="footer">
+                                <div class="container">
+                                        <header class="major">
+                                                <h2>What did you eat?</h2>
+                                        </header>
+                                        <!-- <form method="post" action="#"> -->
+                                        <form id="foodForm" action="#">
+                                                <div class="row gtr-uniform">
+                                                        <div class="col-12"><input type="text" name="foodName" id="foodName" placeholder="Food Name" /></div>
+                                                        <div class="col-12">
+                                                                <ul class="actions special">
+                                                                        <li><input type="submit" value="Send Message" class="primary" /></li>
+                                                                </ul>
+                                                        </div>
+                                                </div>
+                                        </form>
+                                </div>
+                                <footer>
+                                        <ul class="copyright">
+                                                <li>&copy; 32 food 😋</li>
+                                        </ul>
+                                </footer>
+                        </section>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+                <!-- Scripts -->
+                        <script src="assets/js/jquery.min.js"></script>
+                        <script src="assets/js/jquery.scrollex.min.js"></script>
+                        <script src="assets/js/jquery.scrolly.min.js"></script>
+                        <script src="assets/js/browser.min.js"></script>
+                        <script src="assets/js/breakpoints.min.js"></script>
+                        <script src="assets/js/util.js"></script>
+                        <script src="assets/js/main.js"></script>
 
-			<script>
+                        <script>
         document.getElementById("foodForm").addEventListener("submit", function(event) {
             event.preventDefault(); // 폼 기본 제출 방지
 
@@ -59,23 +65,23 @@
             fetch(url, {
                 method: 'GET',
             })
-						.then(response => {
-							if (response.ok) {
-								// 음식 이름을 화면에 표시
-								document.getElementById("foodDisplay").textContent = foodName + " 입력을 완료하였습니다!🎵 ";
+                                                .then(response => {
+                                                        if (response.ok) {
+                                                                // 음식 이름을 화면에 표시
+                                                                document.getElementById("foodDisplay").textContent = foodName + " 입력을 완료하였습니다!🎵 ";
 
-								// 입력된 값 지우기
-								document.getElementById("foodName").value = "";
+                                                                // 입력된 값 지우기
+                                                                document.getElementById("foodName").value = "";
 
-								// 음식 이름 표시 후 상단으로 스크롤 이동
-								window.scrollTo({
-									top: 0,
-									behavior: 'smooth'
-								});
-							} else {
-								console.error('API 호출 실패:', response.statusText);
-							}
-						})
+                                                                // 음식 이름 표시 후 상단으로 스크롤 이동
+                                                                window.scrollTo({
+                                                                        top: 0,
+                                                                        behavior: 'smooth'
+                                                                });
+                                                        } else {
+                                                                console.error('API 호출 실패:', response.statusText);
+                                                        }
+                                                })
             .catch(error => {
                 console.error('Error:', error);
             });
