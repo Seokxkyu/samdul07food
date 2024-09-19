@@ -67,7 +67,7 @@ def food(name: str):
     
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute(sql, ('n07', name, formatted_time))
+            cursor.execute(sql, ('n07', name, t))
         connection.commit()
 
     '''
